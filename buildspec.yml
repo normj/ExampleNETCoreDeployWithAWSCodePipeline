@@ -10,5 +10,5 @@ phases:
       - dotnet eb package
 artifacts:
   files:
-    - ./ExampleNETCoreAWSBeanstalkCICD/bin/Release/netcoreapp2.1/publish
+    - ./ExampleNETCoreAWSBeanstalkCICD/bin/Release/netcoreapp2.1/publish/*
   discard-paths: yes
