@@ -59,7 +59,7 @@
 				  ]
                 },
                 "ManagedPolicyArns" : [
-					"arn:aws:iam::aws:policy/PowerUserAccess"
+					"arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess"
 				]
             }
         },
@@ -85,7 +85,7 @@
 			"Path":"/",
 			"ManagedPolicyArns" : [
 				"arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess",
-				"arn:aws:iam::aws:policy/AdministratorAccess"
+				"arn:aws:iam::aws:policy/AWSElasticBeanstalkFullAccess"
 			]
 		  }
 		},
