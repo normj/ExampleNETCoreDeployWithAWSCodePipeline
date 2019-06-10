@@ -2,6 +2,8 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      dotnet: 2.2   
     commands:
       - dotnet tool install -g Amazon.ElasticBeanstalk.Tools
   build:
@@ -10,5 +12,5 @@ phases:
       - dotnet eb package
 artifacts:
   files:
-    - ./ExampleNETCoreDeployWithAWSCodePipeline/bin/Release/netcoreapp2.1/publish/*
+    - ./ExampleNETCoreDeployWithAWSCodePipeline/bin/Release/netcoreapp2.2/publish/*
   discard-paths: yes

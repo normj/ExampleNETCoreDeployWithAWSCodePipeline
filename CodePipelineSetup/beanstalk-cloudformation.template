@@ -103,7 +103,7 @@
                 "Environment" : {
 					"ComputeType" : "BUILD_GENERAL1_MEDIUM",
                     "Type" : "LINUX_CONTAINER",
-                    "Image" : "aws/codebuild/dot-net:core-2.1",
+                    "Image" : "aws/codebuild/standard:2.0",
                     "PrivilegedMode" : true
 				},
 		        "Source"      : {
