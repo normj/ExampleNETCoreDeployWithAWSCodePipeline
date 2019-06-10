@@ -27,7 +27,7 @@ namespace ExampleNETCoreAWSBeanstalkCICD
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Testing deployment through AWS CodePipeline!");
+                await context.Response.WriteAsync("Testing deployment through AWS CodePipeline!!");
             });
         }
     }
