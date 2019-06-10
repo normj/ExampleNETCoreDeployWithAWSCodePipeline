@@ -21,6 +21,14 @@
 		 "GitHubToken" : {
 		     "Type" : "String",
 			 "Description" : "GitHub repository OAuth token"
+		 },
+		 "EBApplication" : {
+		     "Type" : "String",
+			 "Description" : "Elastic Beanstalk Application Name"
+		 },
+		 "EBEnvironment" : {
+		     "Type" : "String",
+			 "Description" : "Elastic Beanstalk Environment Name"
 		 }
 	},
 
@@ -143,7 +151,7 @@
 						"Name" : "Build",
                         "Actions" : [
 							{
-								"Name" : "Build-ProcessRawImage",
+								"Name" : "BuildASPNETCore",
 								"ActionTypeId" : {
 									"Category" : "Build",
                                     "Provider" : "CodeBuild",
@@ -164,6 +172,36 @@
 									"ProjectName" : { "Ref" : "Build" }
 								}
 							}
+						]
+					},
+					{
+						"Name" : "Deploy",
+                        "Actions" : [
+						{
+							"InputArtifacts":[
+							  {
+								"Name":"ASPNETCoreBundle"
+							  }
+							],
+							"Name":"EbApp",
+							"ActionTypeId":{
+							  "Category":"Deploy",
+							  "Owner":"AWS",
+							  "Version":"1",
+							  "Provider":"ElasticBeanstalk"
+							},
+							"OutputArtifacts":[
+
+							],
+							"Configuration":{
+							  "ApplicationName":{
+								"Ref":"EBApplication"
+							  },
+							  "EnvironmentName":{
+								"Ref":"EBEnvironment"
+							  }
+							}
+						  }
 						]
 					}
                 ]

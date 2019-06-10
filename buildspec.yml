@@ -7,8 +7,8 @@ phases:
   build:
     commands:
       - cd ExampleNETCoreAWSBeanstalkCICD
-      - dotnet eb package --output-package eb-build.zip
+      - dotnet eb package
 artifacts:
   files:
-    - ./ExampleNETCoreAWSBeanstalkCICD/eb-build.zip
+    - ./ExampleNETCoreAWSBeanstalkCICD/bin/Release/netcoreapp2.1/publish
   discard-paths: yes
