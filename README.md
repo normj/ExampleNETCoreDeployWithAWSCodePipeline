@@ -1,7 +1,7 @@
 # Examples Deploynig .NET Core  With AWS CodePipeline
 
 
-This repo is an example of how to setup a AWS CodePipeline that builds a GitHub repository containing an ASP.NET Core 2.1
+This repo is an example of how to setup a AWS CodePipeline that builds a GitHub repository containing an ASP.NET Core 2.2
 application using CodeBuild and then deploying to Elastic Beanstalk.
 
 The file [beanstalk-cloudformation.template](./CodePipelineSetup/beanstalk-cloudformation.template) takes in a GitHub repo
