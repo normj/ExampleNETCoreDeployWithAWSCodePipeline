@@ -1,2 +1,2 @@
-# Example AWS Beanstalk .NET Core CI/CD Setup
+# Examples Deploynig .NET Core  With AWS CodePipeline
 

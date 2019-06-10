@@ -3,25 +3,38 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleNETCoreAWSBeanstalkCICD", "ExampleNETCoreAWSBeanstalkCICD\ExampleNETCoreAWSBeanstalkCICD.csproj", "{458FD7B7-0DC2-458D-82AA-685860688CAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleNETCoreDeployWithAWSCodePipeline", "ExampleNETCoreDeployWithAWSCodePipeline\ExampleNETCoreDeployWithAWSCodePipeline.csproj", "{458FD7B7-0DC2-458D-82AA-685860688CAB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC21B3B6-5865-4BFF-A17C-21CCDD596D44}"
 	ProjectSection(SolutionItems) = preProject
 		buildspec.yml = buildspec.yml
-		codepipeline.template = codepipeline.template
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{22325025-CDA3-4736-83CB-2D32D2FCC215}") = "CodePipelineSetup", "CodePipelineSetup\CodePipelineSetup.cfproj", "{99999999-9999-9999-9999-999999999999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{458FD7B7-0DC2-458D-82AA-685860688CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{458FD7B7-0DC2-458D-82AA-685860688CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{458FD7B7-0DC2-458D-82AA-685860688CAB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{458FD7B7-0DC2-458D-82AA-685860688CAB}.Debug|x86.Build.0 = Debug|Any CPU
 		{458FD7B7-0DC2-458D-82AA-685860688CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{458FD7B7-0DC2-458D-82AA-685860688CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{458FD7B7-0DC2-458D-82AA-685860688CAB}.Release|x86.ActiveCfg = Release|Any CPU
+		{458FD7B7-0DC2-458D-82AA-685860688CAB}.Release|x86.Build.0 = Release|Any CPU
+		{99999999-9999-9999-9999-999999999999}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{99999999-9999-9999-9999-999999999999}.Debug|x86.ActiveCfg = Debug|x86
+		{99999999-9999-9999-9999-999999999999}.Debug|x86.Build.0 = Debug|x86
+		{99999999-9999-9999-9999-999999999999}.Release|Any CPU.ActiveCfg = Release|x86
+		{99999999-9999-9999-9999-999999999999}.Release|x86.ActiveCfg = Release|x86
+		{99999999-9999-9999-9999-999999999999}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

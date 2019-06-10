@@ -6,9 +6,9 @@ phases:
       - dotnet tool install -g Amazon.ElasticBeanstalk.Tools
   build:
     commands:
-      - cd ExampleNETCoreAWSBeanstalkCICD
+      - cd ExampleNETCoreDeployWithAWSCodePipeline
       - dotnet eb package
 artifacts:
   files:
-    - ./ExampleNETCoreAWSBeanstalkCICD/bin/Release/netcoreapp2.1/publish/*
+    - ./ExampleNETCoreDeployWithAWSCodePipeline/bin/Release/netcoreapp2.1/publish/*
   discard-paths: yes

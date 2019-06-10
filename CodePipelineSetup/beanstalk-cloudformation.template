@@ -5,17 +5,17 @@
     "Parameters" : {
 		 "GitHubOwner" : {
 		     "Type" : "String",
-             "Default" : "normj",
+             "Default" : "",
              "Description" : "GitHub repository owner"
 		 },
 		 "GitHubRepo" : {
 		     "Type" : "String",
-             "Default" : "ExampleNETCoreAWSBeanstalkCICD",
+             "Default" : "",
              "Description" : "GitHub repository name"
 		 },
 		 "GitHubBranch" : {
 		     "Type" : "String",
-             "Default" : "master",
+             "Default" : "",
              "Description" : "GitHub repository branch"
 		 },
 		 "GitHubToken" : {
