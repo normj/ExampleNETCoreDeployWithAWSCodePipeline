@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - dotnet tool install -g Amazon.ElasticBeanstalk.Tools
+  build:
+    commands:
+      - cd ExampleNETCoreAWSBeanstalkCICD
+      - dotnet eb package --output-package eb-build.zip
+artifacts:
+  files:
+    - ./ExampleNETCoreAWSBeanstalkCICD/eb-build.zip
+  discard-paths: yes

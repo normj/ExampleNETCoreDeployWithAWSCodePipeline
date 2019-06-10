@@ -1,0 +1,173 @@
+{
+	"AWSTemplateFormatVersion" : "2010-09-09",
+    "Description" : "Template to setup a CodePipeline for deploy a ASP.NET Core application to AWS Elastic Beanstalk",
+
+    "Parameters" : {
+		 "GitHubOwner" : {
+		     "Type" : "String",
+             "Default" : "normj",
+             "Description" : "GitHub repository owner"
+		 },
+		 "GitHubRepo" : {
+		     "Type" : "String",
+             "Default" : "ExampleNETCoreAWSBeanstalkCICD",
+             "Description" : "GitHub repository name"
+		 },
+		 "GitHubBranch" : {
+		     "Type" : "String",
+             "Default" : "master",
+             "Description" : "GitHub repository branch"
+		 },
+		 "GitHubToken" : {
+		     "Type" : "String",
+			 "Description" : "GitHub repository OAuth token"
+		 }
+	},
+
+    "Resources" : {
+
+		"BuildArtifactStore" : {
+		    "Type" : "AWS::S3::Bucket",
+		    "Properties" : {
+		    }
+		},
+		
+        "CodeBuildRole" : {
+            "Type" : "AWS::IAM::Role",
+            "Properties" : {
+                "AssumeRolePolicyDocument" : {
+				  "Statement":[
+					{
+					  "Effect":"Allow",
+					  "Principal":{
+						"Service":[
+						  "codebuild.amazonaws.com"
+						]
+					  },
+					  "Action":[
+						"sts:AssumeRole"
+					  ]
+					}
+				  ]
+                },
+                "ManagedPolicyArns" : [
+					"arn:aws:iam::aws:policy/PowerUserAccess"
+				]
+            }
+        },
+
+		"CodePipelineRole":{
+		  "Type":"AWS::IAM::Role",
+		  "Properties":{
+			"AssumeRolePolicyDocument":{
+			  "Statement":[
+				{
+				  "Effect":"Allow",
+				  "Principal":{
+					"Service":[
+					  "codepipeline.amazonaws.com"
+					]
+				  },
+				  "Action":[
+					"sts:AssumeRole"
+				  ]
+				}
+			  ]
+			},
+			"Path":"/",
+			"ManagedPolicyArns" : [
+				"arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess",
+				"arn:aws:iam::aws:policy/AdministratorAccess"
+			]
+		  }
+		},
+
+		"Build" : {
+		    "Type" : "AWS::CodeBuild::Project",
+		    "Properties" : {
+		        "Artifacts" : {
+					"Type" : "CODEPIPELINE"
+		        },
+		        "ServiceRole" : { "Ref" : "CodeBuildRole" },
+                "Environment" : {
+					"ComputeType" : "BUILD_GENERAL1_MEDIUM",
+                    "Type" : "LINUX_CONTAINER",
+                    "Image" : "aws/codebuild/dot-net:core-2.1",
+                    "PrivilegedMode" : true
+				},
+		        "Source"      : {
+		            "BuildSpec" : "buildspec.yml",
+		            "Type"      : "CODEPIPELINE"
+		        }
+		    }
+		}, 
+
+        "Pipeline" : {
+            "Type" : "AWS::CodePipeline::Pipeline",
+            "Properties" : {
+                "ArtifactStore" : {
+                    "Location" : { "Ref" : "BuildArtifactStore" },
+                    "Type"     : "S3"
+                },
+                "RoleArn"       : {"Fn::GetAtt" : [ "CodePipelineRole", "Arn"]},
+                "Stages"        : [
+					{
+						"Name" : "Source",
+                        "Actions" : [
+							{
+								"Name" : "GitHub",
+								"ActionTypeId" : {
+									"Category" : "Source",
+                                    "Version" : "1",
+									"Owner":"ThirdParty",
+                                    "Provider" : "GitHub"
+								},
+                                "Configuration" : {
+									"Owner": { "Ref" : "GitHubOwner" },
+									"Repo": { "Ref" : "GitHubRepo" },
+									"Branch" : { "Ref" : "GitHubBranch" },
+									"OAuthToken" : { "Ref" : "GitHubToken" }
+								},
+                                "InputArtifacts" : [
+								],
+                                "OutputArtifacts" : [
+									{
+										"Name" : "TheSource"
+									}
+								],
+                                "RunOrder" : 1
+							}
+						]
+					},
+					{
+						"Name" : "Build",
+                        "Actions" : [
+							{
+								"Name" : "Build-ProcessRawImage",
+								"ActionTypeId" : {
+									"Category" : "Build",
+                                    "Provider" : "CodeBuild",
+                                    "Owner" : "AWS",
+                                    "Version" : "1"
+								},
+                                "InputArtifacts" : [
+									{
+										"Name" : "TheSource"
+									}
+								],
+                                "OutputArtifacts" : [
+									{
+										"Name" : "ASPNETCoreBundle"
+									}
+								],
+								"Configuration" : {
+									"ProjectName" : { "Ref" : "Build" }
+								}
+							}
+						]
+					}
+                ]
+            }
+        }
+	}
+}
